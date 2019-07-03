@@ -23,16 +23,14 @@ def apply_coupons(cart, coupons)
     item_name = coupon[:item]
     ### if this coupon can be applied AND we have enough items for it to apply
     if cart.keys.include?(item_name) && (cart[item_name][:count] >= coupon[:num])
-      ### variable setup for readablity 
-      couponed_item = "#{item_name} W/COUPON"
-      ### if we already used the same coupon and have another, update the hash
-      if cart[couponed_item]
-        cart[couponed_item][:count] += coupon[:num]
-      ### if this is our first time using this coupon, create a new hash
+      ### if we already used the same coupon, update existing hash
+      if cart["#{item_name} W/COUPON"]
+        cart["#{item_name} W/COUPON"][:count] += coupon[:num]
+      ### if this is our first time using, create a new hash
       else
-        cart[couponed_item] = {
+        cart["#{item_name} W/COUPON"] = {
           count: coupon[:num],
-          price: coupon[:cost]/coupon[:num],
+          price: coupon[:cost]/coupon[:num].to_f,
           clearance: cart[item_name][:clearance]
         }
       end
