@@ -19,10 +19,13 @@ end
 
 def apply_coupons(cart, coupons)
   coupons.each { |coupon|
+  
     ### variable setup for readablity 
     item_name = coupon[:item]
+    
     ### if this coupon can be applied AND we have enough items for it to apply
     if cart.keys.include?(item_name) && (cart[item_name][:count] >= coupon[:num])
+      
       ### if we already used the same coupon, update existing hash
       if cart["#{item_name} W/COUPON"]
         cart["#{item_name} W/COUPON"][:count] += coupon[:num]
@@ -34,6 +37,7 @@ def apply_coupons(cart, coupons)
           clearance: cart[item_name][:clearance]
         }
       end
+      
       ### update the count in our cart now that a coupon is applied
       cart[item_name][:count] -= coupon[:num]
     end
