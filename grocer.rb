@@ -55,12 +55,14 @@ def apply_clearance(cart)
 end
 
 def checkout(cart, coupons)
+  ### calls all respective functions
   checkout_cart = consolidate_cart(cart)
   checkout_cart = apply_coupons(checkout_cart, coupons)
   checkout_cart = apply_clearance(checkout_cart)
-  
+  ### uses reduce to find total
   total_price = checkout_cart.reduce(0) {|total, (key, value)|
     total += checkout_cart[key][:price] * checkout_cart[key][:count]
   }
+  ### if the toal price is over $100, applies 10% coupon, else returns same value
   total_price = total_price > 100.0 ? total_price*0.9 : total_price
 end
