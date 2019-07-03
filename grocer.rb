@@ -62,5 +62,5 @@ def checkout(cart, coupons)
   total_price = checkout_cart.reduce(0) {|total, (key, value)|
     total += checkout_cart[key][:price] * checkout_cart[key][:count]
   }
-  total_price > 100.0 ? totalprice = totalprice*0.9 : total_price
+  total_price = total_price > 100.0 ? totalprice*0.9 : total_price
 end
