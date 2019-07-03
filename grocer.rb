@@ -46,7 +46,9 @@ def apply_coupons(cart, coupons)
 end
 
 def apply_clearance(cart)
-  cart.each {||}
+  cart.each {|item|
+    p item
+  }
 end
 
 def checkout(cart, coupons)
