@@ -58,7 +58,9 @@ def checkout(cart, coupons)
   checkout_cart = consolidate_cart(cart)
   checkout_cart = apply_coupons(checkout_cart, coupons)
   checkout_cart = apply_clearance(checkout_cart)
-  checkout_cart.reduce(0) {|total, (key, value)|
+  
+  total_price = checkout_cart.reduce(0) {|total, (key, value)|
     total += checkout_cart[key][:price] * checkout_cart[key][:count]
   }
+  total_price > 100.0 ? totalprice = totalprice*0.9 : total_price
 end
